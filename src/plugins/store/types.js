@@ -1,0 +1,14 @@
+// export const LOGIN = 'login'
+// export const UPDATE_LOGIN_STATUS = 'updateLoginStatus'
+// export const SAVE_JWT = 'saveJwtToken'
+export default {
+  LOGIN: 'login',
+  UPDATE_LOGIN_STATUS: 'UPDATE_LOGIN_STATUS',
+  SAVE_JWT: 'SAVE_JWT',
+  CLEAR_AUTH_DATA: 'CLEAR_AUTH_DATA',
+  UPDATE_VIDEOS: 'UPDATE_VIDEOS',
+  ADD_VIDEO: 'ADD_VIDEO',
+  DELETE_VIDEO: 'DELETE_VIDEO',
+  UPDATE_VIDEO: 'UPDATE_VIDEO',
+  UPDATE_FILTERS: 'UPDATE_FILTERS'
+}

@@ -1,0 +1,43 @@
+{
+  "common": {
+    "label": {
+      "OK": "OK",
+      "CANCEL": "CANCEL",
+      "update": "Update"
+    }
+  },
+  "login": {
+    "welcomeMsg": "Welcome to Family Portal",
+    "portalLoginMsg": "Family Portal Login",
+    "errorMsg": "Invalid username/password",
+    "loginLable": "Login",
+    "usernameLable": "username",
+    "passwordLable": "Password",
+    "loginFormLable": "Login Form"
+  },
+  "header": {
+    "homeLabel": "Home"
+  },
+  "navigationDrawer": {
+    "addNewVideoLabel": "Add New Video",
+    "editVideoLabel": "Edit Video",
+    "filterBy": "Filter by",
+    "language": "Language",
+    "dialog": {
+      "videoTitleLabel": "Video Title:",
+      "videoByLabel": "By:",
+      "youtubeUrlLabel": "YouTube URL:",
+      "languageLabel": "Language:",
+      "chooseLangLabel": "Please choose language:",
+      "addLabel": "Add"
+    }
+  },
+  "videoAction": {
+    "deleteLabel": "Delete this video",
+    "editLabel" : "Edit this video",
+    "selectActionLabel": "Select an action",
+    "message": {
+      "areyouSureToDelete": "Are you sure to permanently delete this video?"
+    }
+  }
+}
