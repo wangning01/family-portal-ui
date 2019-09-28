@@ -14,7 +14,7 @@
     "@fortawesome/fontawesome-free": "^5.5.0",
     "ag-grid-community": "^19.1.4",
     "ag-grid-vue": "^19.1.2",
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "hover.css": "^2.3.2",
     "jquery": "^3.3.1",
     "jquery-plugin-printthis": "^1.0.1",
