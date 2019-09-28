@@ -16,7 +16,7 @@
     "ag-grid-vue": "^19.1.2",
     "axios": "^0.18.0",
     "hover.css": "^2.3.2",
-    "jquery": "^3.3.1",
+    "jquery": "^3.4.0",
     "jquery-plugin-printthis": "^1.0.1",
     "material-design-icons-iconfont": "^3.0.3",
     "npm": "^6.6.0",
