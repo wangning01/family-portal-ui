@@ -14,11 +14,23 @@
 import ActionTypes from '@/plugins/store/types.js'
 export default {
   name: 'headerComp',
+  data() {
+    return {
+      // videos: [{name: 'video 1', videoId: 1},{name: 'video 2', videoId: 2}]
+    }
+  },
   methods: {
     signOut: function () {
       this.$store.dispatch(ActionTypes.CLEAR_AUTH_DATA)
       // console.log(this.$store.state)
       this.$router.push('/')
+    }
+  },
+  computed: {
+    videos: {
+      get: function(){
+        return this.$store.state.videos
+      }
     }
   }
 }

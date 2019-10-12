@@ -7,10 +7,10 @@
             <v-icon>{{ addNewVideo.icon }}</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-              <v-list-tile-title @click="openAddVideoDialog">
+              <v-list-tile-title  @click="openAddVideoDialog">
                 <h4>
                   <!-- <router-link class="white" to="" @click.native.prevent="openAddVideoDialog">{{addNewVideo.title}}</router-link> -->
-                  <a>{{addNewVideo.title}}</a>
+                  <a style="color:white">{{addNewVideo.title}}</a>
                 </h4>
               </v-list-tile-title>
           </v-list-tile-content>
@@ -58,6 +58,15 @@
               </v-list-tile-action>
             </v-list-tile>
           </v-list-group>
+          <!-- <v-divider></v-divider> -->
+          <v-autocomplete
+          v-model="autoCompleteSelectedVideoId"
+          @change="onAutoCompleteSelect()"
+          label="Search"
+          item-text="name"
+          item-value="videoId"
+          :items="videos">
+         </v-autocomplete>
         </v-list>
 
       <add-video-dialog v-model="isDisplayDialog"></add-video-dialog>
@@ -81,7 +90,8 @@ export default {
       items: [
         { title: this.$t('navigationDrawer.addNewVideoLabel'), icon: 'add' }
       ],
-      isDisplayDialog: false
+      isDisplayDialog: false,
+      autoCompleteSelectedVideoId: -1
     }
   },
   methods: {
@@ -90,25 +100,45 @@ export default {
       this.isDisplayDialog = true
     },
     onClickFilterItem: function(subitem){ 
-      console.log("subitem:")
-      console.log(subitem)
-      axios({
-      method: 'GET',
-      'url': '/api/filterBy/'+subitem.byColumn+"/"+subitem.value
-      }).then((response) => {
-        console.log('filtered videos:')
-        console.log(response.data)
-        this.$store.dispatch(ActionTypes.UPDATE_VIDEOS, {videos: response.data})
-      },
-      (error) => {
-        console.log(error)
-      });
+          console.log("subitem:")
+          console.log(subitem)
+          axios({
+          method: 'GET',
+          'url': '/api/filterBy/'+subitem.byColumn+"/"+subitem.value
+          }).then((response) => {
+            console.log('filtered videos:')
+            console.log(response.data)
+            this.$store.dispatch(ActionTypes.UPDATE_VIDEOS, {videos: response.data})
+          },
+          (error) => {
+            console.log(error)
+          });
+    },
+    onAutoCompleteSelect: function(){
+      if(this.autoCompleteSelectedVideoId){
+          axios({
+          method: 'GET',
+          'url': '/api/filterBy/video_id/'+this.autoCompleteSelectedVideoId
+          }).then((response) => {
+            console.log('filtered videos:')
+            console.log(response.data)
+            this.$store.dispatch(ActionTypes.UPDATE_VIDEOS, {videos: response.data})
+          },
+          (error) => {
+            console.log(error)
+          });
+      }
     }
   },
   computed: {
     filters: {
       get: function(){
         return this.$store.state.filters
+      }
+    },
+    videos: {
+      get: function(){
+        return this.$store.state.videos
       }
     }
   }
