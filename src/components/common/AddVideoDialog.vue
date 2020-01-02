@@ -56,19 +56,19 @@ export default {
   },
   methods: {
     addVideo: function () {
-    //   console.log('addVideo invoked...')
-      axios({
-        method: 'POST',
-        'url': '/api/addVideo',
-        'data': this.video
-      }).then((response) => {
-        console.log('Add video successful!')
-        console.log(response.data)
-        this.$store.dispatch(ActionTypes.ADD_VIDEO, {video: response.data})
-      },
-      (error) => {
-        console.log(error)
-      })
+      // axios({
+      //   method: 'POST',
+      //   'url': '/api/addVideo',
+      //   'data': this.video
+      // }).then((response) => {
+      //   console.log('Add video successful!')
+      //   console.log(response.data)
+      //   this.$store.dispatch(ActionTypes.ADD_VIDEO, {video: response.data})
+      // },
+      // (error) => {
+      //   console.log(error)
+      // })
+      this.addVideo(this.video)
       this.closeDialog()
       this.resetModel()
     },

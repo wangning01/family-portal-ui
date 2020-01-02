@@ -67,6 +67,17 @@
           item-value="videoId"
           :items="videos">
          </v-autocomplete>
+
+         <v-autocomplete
+          v-model="searchItem"
+          :search-input.sync="ytQuery"
+          label="Search Youtube"
+          @change="addVideo(searchItem)"
+          item-text="name"
+          item-value="videoId"
+          :items="ytSearchResults"
+          return-object>
+         </v-autocomplete>
         </v-list>
 
       <add-video-dialog v-model="isDisplayDialog"></add-video-dialog>
@@ -76,6 +87,7 @@
 import AddVideoDialog from '@/components/common/AddVideoDialog.vue'
 import axios from 'axios'
 import ActionTypes from '@/plugins/store/types.js'
+import _ from 'lodash'
 // import jQuery from 'jquery'
 // let $ = jQuery
 
@@ -87,11 +99,15 @@ export default {
   data () {
     return {
       addNewVideo: {title: this.$t('navigationDrawer.addNewVideoLabel'), icon: 'add'},
-      items: [
-        { title: this.$t('navigationDrawer.addNewVideoLabel'), icon: 'add' }
-      ],
+      // items: [
+      //   { title: this.$t('navigationDrawer.addNewVideoLabel'), icon: 'add' }
+      // ],
       isDisplayDialog: false,
-      autoCompleteSelectedVideoId: -1
+      autoCompleteSelectedVideoId: -1,
+      searchItem: {},
+      ytQuery: '',
+      ytSearchResults: [],
+      googleApiKey: 'AIzaSyA0W0jbMoiaQtv5tAoG29lZ_3QEAHgUkxk'
     }
   },
   methods: {
@@ -128,6 +144,50 @@ export default {
             console.log(error)
           });
       }
+    },
+    onChange: function(){
+      alert('input changed')
+    },
+    // searchYouTube: _.debounce((searchItem) => {
+    //   let params = {
+    //         key: 'AIzaSyA0W0jbMoiaQtv5tAoG29lZ_3QEAHgUkxk',
+    //         q: searchItem,
+    //         part: 'snippet',
+    //         maxResults: 10,
+    //         type: 'video',
+    //         videoEmbeddable: true
+    //   }
+    //     axios.get('https://www.googleapis.com/youtube/v3/search', {params})
+    //     .then(response => {
+    //     console.log('search response:' + response)
+    //     })
+    // }, 500)
+    searchYouTube: 
+      _.debounce((_self) => {
+        let params = {
+              key: _self.googleApiKey,
+              q: _self.ytQuery,
+              part: 'snippet',
+              maxResults: 10,
+              type: 'video',
+              videoEmbeddable: true
+        }
+          axios.get('https://www.googleapis.com/youtube/v3/search', {params})
+          .then(response => {
+          console.log( response.data)
+          response.data.items.forEach(element => {
+            _self.ytSearchResults.push(_self.convertToVideo(element))
+          });
+
+          })
+      }, 500
+    ),
+    convertToVideo: function(ytItem){
+      let video = {}
+      video.youtubeLink = 'https://www.youtube.com/embed/'+ytItem.id.videoId
+      video.name = ytItem.snippet.title
+      return video
+
     }
   },
   computed: {
@@ -140,6 +200,13 @@ export default {
       get: function(){
         return this.$store.state.videos
       }
+    }
+  },
+  watch: {
+    ytQuery: function(value){
+        if(!value)
+          return
+        this.searchYouTube(this)
     }
   }
 }

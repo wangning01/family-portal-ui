@@ -46,6 +46,21 @@ export default {
             console.log(error)
           })
     },
+    addVideo(video) {
+      console.log(video)
+      axios({
+        method: 'POST',
+        'url': '/api/addVideo',
+        'data': video
+      }).then((response) => {
+        console.log('Add video successful!')
+        console.log(response.data)
+        this.$store.dispatch(ActionTypes.ADD_VIDEO, {video: response.data})
+      },
+      (error) => {
+        console.log(error)
+      })
+    },
     clone(obj){
       return JSON.parse(JSON.stringify(obj))
     }
