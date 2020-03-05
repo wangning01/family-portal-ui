@@ -62,7 +62,7 @@
           <v-autocomplete
           v-model="autoCompleteSelectedVideoId"
           @change="onAutoCompleteSelect()"
-          label="Search"
+          :label="$t('navigationDrawer.search')"
           item-text="name"
           item-value="videoId"
           :items="videos">
@@ -71,7 +71,7 @@
          <v-autocomplete
           v-model="searchItem"
           :search-input.sync="ytQuery"
-          label="Search Youtube"
+          :label="$t('navigationDrawer.searchYoutube')"
           @change="addVideo(searchItem)"
           item-text="name"
           item-value="videoId"
@@ -79,6 +79,10 @@
           return-object>
          </v-autocomplete>
         </v-list>
+        <v-btn class="mx-2" tile dark color="primary">
+          <v-icon dark>mdi-format-list-bulleted-square</v-icon>&nbsp;
+          {{$t('navigationDrawer.playlist')}}
+        </v-btn>
 
       <add-video-dialog v-model="isDisplayDialog"></add-video-dialog>
     </v-navigation-drawer>

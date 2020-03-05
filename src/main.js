@@ -6,6 +6,7 @@ import router from './router'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
+import '@mdi/font/css/materialdesignicons.css'
 import 'hover.css/css/hover-min.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 import i18n from '@/plugins/i18n/i18n.js'
@@ -21,7 +22,7 @@ import VuePlayerPlugin, { Player } from 'vue-youtube-iframe-api'
 
 Vue.config.productionTip = false
 Vue.use(Vuetify, {
-  iconfont: 'fa'
+  iconfont: 'md' || 'mdi'
 })
 Vue.use(VeeValidate)
 // Vue.use(Vuex)

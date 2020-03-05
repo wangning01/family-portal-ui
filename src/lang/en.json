@@ -23,6 +23,9 @@
     "editVideoLabel": "Edit Video",
     "filterBy": "Filter by",
     "language": "Language",
+    "search": "Search",
+    "searchYoutube": "Search Youtube",
+    "playlist": "Playlist",
     "dialog": {
       "videoTitleLabel": "Video Title:",
       "videoByLabel": "By:",
