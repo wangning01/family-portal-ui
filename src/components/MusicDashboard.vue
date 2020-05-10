@@ -45,25 +45,6 @@
           </v-card>
         </v-flex>
       </v-layout>
-      <v-dialog v-model="isDisplay" width="560" persistent>
-        <v-card>
-          <v-card-title
-            class="headline primary pb-1 pt-1"
-            primary-title
-          >
-            <v-spacer>{{thisVideo.name}}</v-spacer>
-            <v-icon @click="closeDialog">close</v-icon>
-          </v-card-title>
-        <!-- <youtube :src="youtubeLink" :width="560" :height="315"></youtube> -->
-        <!-- <youtube :video-id="videoId" ref="youtube" width="560" height="315" :player-vars="playerVars"></youtube> -->
-            <yt-player 
-            ref="youtube" 
-            :width="560" 
-            :height="315" 
-            @ended="playNext"
-            :playerVars="playerVars"></yt-player>
-        </v-card>
-      </v-dialog>
     </v-container>
   </v-content>
 </template>
@@ -129,11 +110,6 @@ export default {
   },
   methods: {
     play (video) {
-      // console.log('Now playing' + video.name)
-      // this.isDisplay = true
-      // this.thisVideo = video
-      // this.$refs.youtube.loadByUrl(video.youtubeLink)
-      // this.$refs.youtube.player.playVideo()
       this.$playVideoList(
         {
           startVideo: video,
@@ -141,13 +117,6 @@ export default {
           continuous: true
         }
       )
-    },
-    playing () {
-      console.log('we are watching')
-    },
-    closeDialog () {
-      this.$refs.youtube.player.stopVideo()
-      this.isDisplay = false
     },
     showMenu (video, index) {
       // alert('Menu clicked.')
@@ -161,20 +130,6 @@ export default {
           console.log('action: '+response.action)
         }
       )
-    },
-    playNext (){
-      let nextIndex = this.$store.state.videos.findIndex(
-        video=>video.videoId===this.thisVideo.videoId
-      ) + 1
-      if(nextIndex<this.$store.state.videos.length){
-        this.play(this.$store.state.videos[nextIndex])
-        // this.$refs.youtube.loadByUrl(this.thisVideo.youtubeLink)
-        // this.$refs.youtube.player.playVideo()
-        // this.thisVideo = this.$store.state.videos[index+1]
-      }
-    },
-    onPlayerReady (){
-      this.$refs.youtube.player.playVideo()
     }
     
   }
