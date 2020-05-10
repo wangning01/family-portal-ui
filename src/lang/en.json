@@ -39,8 +39,10 @@
     "deleteLabel": "Delete this video",
     "editLabel" : "Edit this video",
     "selectActionLabel": "Select an action",
+    "addToPlayListLabel": "Add to Playlist",
     "message": {
-      "areyouSureToDelete": "Are you sure to permanently delete this video?"
+      "areyouSureToDelete": "Are you sure to permanently delete this video?",
+      "areyouSureAddToPloayList": "Are you sure to add this video to playlist?"
     }
   }
 }

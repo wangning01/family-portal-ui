@@ -79,16 +79,19 @@
           return-object>
          </v-autocomplete>
         </v-list>
-        <v-btn class="mx-2" tile dark color="primary">
+        <v-btn class="mx-2" tile dark color="primary" @click="showPlaylist()"> 
           <v-icon dark>mdi-format-list-bulleted-square</v-icon>&nbsp;
           {{$t('navigationDrawer.playlist')}}
         </v-btn>
 
       <add-video-dialog v-model="isDisplayDialog"></add-video-dialog>
+      <!-- <play-list v-model="isDisplayPlayList" :list="playList"></play-list> -->
+      <play-lists v-model="isDisplayPlayList" :list="playlist"></play-lists>
     </v-navigation-drawer>
 </template>
 <script>
 import AddVideoDialog from '@/components/common/AddVideoDialog.vue'
+import PlayLists from '@/components/common/PlayList.vue'
 import axios from 'axios'
 import ActionTypes from '@/plugins/store/types.js'
 import _ from 'lodash'
@@ -97,7 +100,7 @@ import _ from 'lodash'
 
 export default {
   name: 'Navigation',
-  components: {AddVideoDialog},
+  components: {AddVideoDialog, PlayLists},
   beforeMount: function () {
   },
   data () {
@@ -111,7 +114,9 @@ export default {
       searchItem: {},
       ytQuery: '',
       ytSearchResults: [],
-      googleApiKey: 'AIzaSyA0W0jbMoiaQtv5tAoG29lZ_3QEAHgUkxk'
+      googleApiKey: 'AIzaSyA0W0jbMoiaQtv5tAoG29lZ_3QEAHgUkxk',
+      isDisplayPlayList: false,
+      playlist: []
     }
   },
   methods: {
@@ -192,6 +197,15 @@ export default {
       video.name = ytItem.snippet.title
       return video
 
+    },
+    showPlaylist: function(){
+      this.isDisplayPlayList = true
+      this.getPlaylist().then(
+        (response) => {
+            // console.log(response.data)
+            this.playlist = response.data
+        }
+      );
     }
   },
   computed: {

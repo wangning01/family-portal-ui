@@ -14,6 +14,7 @@
                         <span><router-link  to="/home" class="" >{{$t('videoAction.editLabel')}}</router-link></span><br> -->
                         <v-btn class="grey" @click="onDeleteVideo()">{{$t('videoAction.deleteLabel')}}</v-btn>
                         <v-btn class="grey" @click="onEditVideo()">{{$t('videoAction.editLabel')}}</v-btn>
+                        <v-btn class="grey" @click="onAddToPlayList()">{{$t('videoAction.addToPlayListLabel')}}</v-btn>
                         <p>&nbsp;</p>
                         <p>&nbsp;</p>
                     </v-layout>
@@ -65,6 +66,18 @@ export default {
                     console.log('updatedVideo: '+response.data)
                     this.updateVideo(response.data)
                 }
+            )
+        },
+        onAddToPlayList(){
+           let message = this.$t('videoAction.message.areyouSureAddToPloayList')
+            this.closeDialog();
+            this.$confirmDialog(
+                {message: message,title: this.video.name})
+                .then(
+                (response) => {
+                    if(response.confirmed && response.confirmed === true)
+                        this.addToPlayList(this.video)
+                } 
             )
         }
     }

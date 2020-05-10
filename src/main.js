@@ -14,6 +14,8 @@ import store from '@/plugins/store/store.js'
 import ActionOnVideoDialog from '@/plugins/actionOnVideoDialog.js'
 import ConfirmDialog from '@/plugins/confirmDialog.js'
 import EditVideoDialog from '@/plugins/editVideoDialog.js'
+import AddToPlayListDialog from '@/plugins/addToPlayListDialog.js'
+import PlayVideoList from '@/plugins/playVideoList.js'
 import VeeValidate from 'vee-validate'
 import mixin from '@/plugins/mixin/mixin.js'
 // import VueYoutube from 'vue-youtube'
@@ -33,6 +35,8 @@ Vue.component('yt-player', Player)
 Vue.use(ActionOnVideoDialog)
 Vue.use(ConfirmDialog)
 Vue.use(EditVideoDialog)
+Vue.use(AddToPlayListDialog)
+Vue.use(PlayVideoList)
 Vue.mixin(mixin)
 
 /* eslint-disable no-new */

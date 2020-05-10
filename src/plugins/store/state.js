@@ -3,5 +3,6 @@ export default {
   username: '',
   jwtToken: '',
   videos: {},
-  filters: []
+  filters: [],
+  playLists: []
 }

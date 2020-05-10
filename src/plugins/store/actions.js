@@ -34,5 +34,9 @@ export default {
   },
   [ActionTypes.UPDATE_FILTERS]: (context, data) => {
     context.commit(ActionTypes.UPDATE_FILTERS, data)
-  }
+  },
+  [ActionTypes.SAVE_PLAYLIST]: (context, data) => {
+    context.commit(ActionTypes.SAVE_PLAYLIST, data)
+  },
+  
 }

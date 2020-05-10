@@ -129,11 +129,18 @@ export default {
   },
   methods: {
     play (video) {
-      console.log('Now playing' + video.name)
-      this.isDisplay = true
-      this.thisVideo = video
-      this.$refs.youtube.loadByUrl(video.youtubeLink)
-      this.$refs.youtube.player.playVideo()
+      // console.log('Now playing' + video.name)
+      // this.isDisplay = true
+      // this.thisVideo = video
+      // this.$refs.youtube.loadByUrl(video.youtubeLink)
+      // this.$refs.youtube.player.playVideo()
+      this.$playVideoList(
+        {
+          startVideo: video,
+          list: this.videos,
+          continuous: true
+        }
+      )
     },
     playing () {
       console.log('we are watching')

@@ -39,6 +39,12 @@ export default {
     console.log(payload)
     state.filters = payload.filters
   },
+  [ActionTypes.SAVE_PLAYLIST] (state, payload) {
+    console.log('payload')
+    console.log(payload)
+    state.playLists = payload.playLists
+  }
+  
 
   
   

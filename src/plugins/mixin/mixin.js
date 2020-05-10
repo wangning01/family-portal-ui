@@ -63,6 +63,38 @@ export default {
     },
     clone(obj){
       return JSON.parse(JSON.stringify(obj))
+    },
+    addToPlayList(video) {
+      axios({
+        method: 'POST',
+        url: '/api/addToPlayList',
+        data: video
+      }).then((response) => {
+        console.log('Add to playlist successful!')
+        this.$store.dispatch(ActionTypes.ADD_TO_PLAYLIST, {video: video})
+      },
+      (error) => {
+        console.log(error)
+      })
+      
+    },
+    getPlaylist(){
+      console.log('getPlaylist invoked...')
+      return axios({
+        method: 'GET',
+        'url': '/api/getPlaylist'
+      })
+      // axios({
+      //   method: 'GET',
+      //   'url': '/api/getPlaylist'
+      // }).then((response) => {
+      //   console.log('Playlist fetched successful!')
+      //   console.log(response.data)
+      //   this.$store.dispatch(ActionTypes.SAVE_PLAYLIST, {playLists: response.data})
+      // },
+      // (error) => {
+      //   console.log(error)
+      // });
     }
   }
 }
