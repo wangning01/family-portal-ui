@@ -64,16 +64,15 @@ export default {
                 this.$refs.ytplayer.player.stopVideo()
         },
         playNext (){
-            this.nextVideo = this.findNextVideoInList(this.nextVideo, this.list)
-            if(this.nextVideo) this.playVideo(this.nextVideo)
-            // let nextIndex = this.nextVideo+1
-            // if(nextIndex<this.list.length){
-            //     this.playVideo(this.list[nextIndex])
-            //     this.nextVideo = nextIndex
-            //     // this.$refs.youtube.loadByUrl(this.thisVideo.youtubeLink)
-            //     // this.$refs.youtube.player.playVideo()
-            //     // this.thisVideo = this.$store.state.videos[index+1]
-            // }
+            if(this.continuous){
+                this.nextVideo = this.findNextVideoInList(this.nextVideo, this.list)
+                if(this.nextVideo) this.playVideo(this.nextVideo)
+            }else{
+                this.isDisplay = false
+                this.$$destroy()
+            }
+
+            
         },
         findNextVideoInList(current, list){
             let nextIndex = list.findIndex(

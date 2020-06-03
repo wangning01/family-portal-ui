@@ -78,23 +78,12 @@ export default {
       })
       
     },
-    getPlaylist(){
+    getPlaylist(playlistId){
       console.log('getPlaylist invoked...')
       return axios({
         method: 'GET',
-        'url': '/api/getPlaylist'
+        url: '/api/getPlaylist/'+playlistId
       })
-      // axios({
-      //   method: 'GET',
-      //   'url': '/api/getPlaylist'
-      // }).then((response) => {
-      //   console.log('Playlist fetched successful!')
-      //   console.log(response.data)
-      //   this.$store.dispatch(ActionTypes.SAVE_PLAYLIST, {playLists: response.data})
-      // },
-      // (error) => {
-      //   console.log(error)
-      // });
     }
   }
 }

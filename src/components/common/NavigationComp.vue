@@ -1,8 +1,7 @@
 <template>
-    <v-navigation-drawer app width="230" class="" dark permanent  >
+    <v-navigation-drawer app width="220" class="" dark permanent  >
       <v-list>
-          <v-list-tile
-         >
+          <v-list-tile>
           <v-list-tile-action>
             <v-icon>{{ addNewVideo.icon }}</v-icon>
           </v-list-tile-action>
@@ -78,37 +77,77 @@
           :items="ytSearchResults"
           return-object>
          </v-autocomplete>
+
         </v-list>
-        <v-btn class="mx-2" tile dark color="primary" @click="showPlaylist()"> 
-          <v-icon dark>mdi-format-list-bulleted-square</v-icon>&nbsp;
-          {{$t('navigationDrawer.playlist')}}
-        </v-btn>
+
+        <v-layout>
+          <v-flex xs8>
+            <v-menu
+            open-on-hover
+            closeOnClick
+            close-on-content-click
+            offset-y
+            >
+              <template v-slot:activator="{ on }">
+                <v-btn dark 
+                  color="primary" 
+                  v-on="on"
+                > 
+                  <v-icon dark>mdi-format-list-bulleted-square</v-icon>&nbsp;
+                  {{$t('navigationDrawer.playlist')}}
+                </v-btn>
+              </template>
+              <v-list>
+                <v-list-tile
+                  v-for="(item, index) in playlists"
+                  :key="index"
+                  @click="showPlaylist(item.playListId)"
+                >
+                  <v-list-tile-title>{{ item.name }}</v-list-tile-title>
+                </v-list-tile>
+              </v-list>
+            </v-menu>
+          </v-flex>
+          <v-flex xs4>
+            <v-btn color="primary" icon @click="createNewPlayList">
+              <v-icon>add</v-icon>
+            </v-btn>
+          </v-flex>
+        </v-layout>
+               
 
       <add-video-dialog v-model="isDisplayDialog"></add-video-dialog>
       <!-- <play-list v-model="isDisplayPlayList" :list="playList"></play-list> -->
-      <play-lists v-model="isDisplayPlayList" :list="playlist"></play-lists>
+      <play-list v-model="isDisplayPlayList" :list="playlist"></play-list>
     </v-navigation-drawer>
 </template>
 <script>
 import AddVideoDialog from '@/components/common/AddVideoDialog.vue'
-import PlayLists from '@/components/common/PlayList.vue'
+import PlayList from '@/components/common/PlayList.vue'
 import axios from 'axios'
 import ActionTypes from '@/plugins/store/types.js'
 import _ from 'lodash'
-// import jQuery from 'jquery'
-// let $ = jQuery
 
 export default {
   name: 'Navigation',
-  components: {AddVideoDialog, PlayLists},
+  components: {AddVideoDialog, PlayList},
   beforeMount: function () {
+  },
+  mounted: function() {
+    axios({
+          method: 'GET',
+          'url': '/api/getPlaylists'
+          }).then((response) => {
+            console.log(response.data)
+            this.playlists = response.data
+          },
+          (error) => {
+            console.log(error)
+          });
   },
   data () {
     return {
       addNewVideo: {title: this.$t('navigationDrawer.addNewVideoLabel'), icon: 'add'},
-      // items: [
-      //   { title: this.$t('navigationDrawer.addNewVideoLabel'), icon: 'add' }
-      // ],
       isDisplayDialog: false,
       autoCompleteSelectedVideoId: -1,
       searchItem: {},
@@ -116,7 +155,8 @@ export default {
       ytSearchResults: [],
       googleApiKey: 'AIzaSyA0W0jbMoiaQtv5tAoG29lZ_3QEAHgUkxk',
       isDisplayPlayList: false,
-      playlist: []
+      playlist: {},
+      playlists: []
     }
   },
   methods: {
@@ -198,14 +238,21 @@ export default {
       return video
 
     },
-    showPlaylist: function(){
+    showPlaylist: function(playlistId){
       this.isDisplayPlayList = true
-      this.getPlaylist().then(
+      this.getPlaylist(playlistId).then(
         (response) => {
             // console.log(response.data)
             this.playlist = response.data
         }
       );
+    },
+    createNewPlayList: function(){
+      this.$createNewPlaylist().then(
+        (response) => {
+          console.log(response.data)
+        }
+      )
     }
   },
   computed: {

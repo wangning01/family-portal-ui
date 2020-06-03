@@ -8,10 +8,9 @@
           >
             {{list.name}}
             <v-spacer></v-spacer>
-            <v-icon @click="close()">close</v-icon>
+            <v-icon @click="close">close</v-icon>
           </v-card-title>
           
-          <!-- <v-divider></v-divider> -->
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
@@ -22,18 +21,16 @@
               {{$t('navigationDrawer.dialog.addLabel')}}
             </v-btn>
           </v-card-actions>
-          <!-- <div>hello</div>
-          <div>hello</div> -->
           <v-container>
           <v-layout row wrap>
-            <!-- <v-card > -->
+            <v-card >
               <v-flex v-for="(video, index) in list.videos" :key="video.videoId" xs12 class="pr-1 pb-1">
                   <yt-player :yturl="video.youtubeLink" :ref="'yt'+index" :width="225" :height="120" 
                   :playerVars="playerVars" 
                    @playing="stopAndPlayInPopup('yt'+index, video)"
                   />
               </v-flex>
-            <!-- </v-card> -->
+            </v-card>
           </v-layout>
           </v-container>
         </v-card>
@@ -47,7 +44,7 @@ export default {
   name: 'playList',
   props: {
     value : Boolean,
-    list: {}
+    list: Object
   },
   beforeMount: function(){
   },
@@ -74,7 +71,6 @@ export default {
   },
   methods: {
     close: function () {
-      console.log('close clicked')
       this.displayDialog=false
     },
     stopAndPlayInPopup: function(ref, video) {
@@ -85,32 +81,11 @@ export default {
         {
           list: this.list.videos,
           startVideo: video,
-          continuous: true
+          continuous: false
         }
       )
 
-      // this.isDisplay = true
-      // this.thisVideo = this.list.videos[index]
-      // this.$refs.youtube.loadByUrl(this.thisVideo.youtubeLink)
-      // this.$refs.youtube.player.playVideo()
-    },
-    play(video){
-      this.$refs.youtube.loadByUrl(video.youtubeLink)
-      this.$refs.youtube.player.playVideo()
-    },
-    playNext (){
-      let nextIndex = this.list.videos.findIndex(
-        video=>video.videoId===this.thisVideo.videoId
-      ) + 1
-      if(nextIndex<this.list.videos.length){
-        this.play(this.list.videos[nextIndex])
-        // this.$refs.youtube.loadByUrl(this.thisVideo.youtubeLink)
-        // this.$refs.youtube.player.playVideo()
-        // this.thisVideo = this.$store.state.videos[index+1]
-      }
-    },
-
-    
+    }
   }
 }
 </script>

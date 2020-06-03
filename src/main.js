@@ -16,6 +16,7 @@ import ConfirmDialog from '@/plugins/confirmDialog.js'
 import EditVideoDialog from '@/plugins/editVideoDialog.js'
 import AddToPlayListDialog from '@/plugins/addToPlayListDialog.js'
 import PlayVideoList from '@/plugins/playVideoList.js'
+import CreateNewPlaylist from '@/plugins/createNewPlaylist.js'
 import VeeValidate from 'vee-validate'
 import mixin from '@/plugins/mixin/mixin.js'
 // import VueYoutube from 'vue-youtube'
@@ -37,6 +38,7 @@ Vue.use(ConfirmDialog)
 Vue.use(EditVideoDialog)
 Vue.use(AddToPlayListDialog)
 Vue.use(PlayVideoList)
+Vue.use(CreateNewPlaylist)
 Vue.mixin(mixin)
 
 /* eslint-disable no-new */

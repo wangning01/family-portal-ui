@@ -3,7 +3,8 @@
     "label": {
       "OK": "OK",
       "CANCEL": "CANCEL",
-      "update": "Update"
+      "update": "Update",
+      "close": "Close"
     }
   },
   "login": {
@@ -44,5 +45,10 @@
       "areyouSureToDelete": "Are you sure to permanently delete this video?",
       "areyouSureAddToPloayList": "Are you sure to add this video to playlist?"
     }
+  },
+  "createNewPlaylist": {
+    "createNewPlaylistLabel": "Create new playlist",
+    "playlistNameLabel": "Playlist name:",
+    "createLabel": "Create"
   }
 }
