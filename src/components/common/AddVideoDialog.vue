@@ -22,7 +22,7 @@
             <v-btn
               color="primary"
               flat
-              @click="addVideo()"
+              @click="add()"
             >
               {{$t('navigationDrawer.dialog.addLabel')}}
             </v-btn>
@@ -55,7 +55,7 @@ export default {
     }
   },
   methods: {
-    addVideo: function () {
+    add: function () {
       // axios({
       //   method: 'POST',
       //   'url': '/api/addVideo',

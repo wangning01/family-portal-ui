@@ -11,34 +11,36 @@
         <v-flex v-for="(video, index) in videos" :key="video.videoId" xs4 class="pr-1 pb-1">
           <v-card >
             <v-layout >
-              <v-flex xs7 class="video-bg-color" @click.prevent="play(video)">
+              <v-flex xs8 class="video-bg-color" @click.prevent="play(video)">
                   <v-layout>
-                      <yt-player :yturl="video.youtubeLink" ref="yt" :width="225" :height="120" :playerVars="playerVars"></yt-player>
+                      <yt-player :yturl="video.youtubeLink" ref="yt" :width="215" :height="120" :playerVars="playerVars"></yt-player>
                   </v-layout>
               </v-flex>
-              <v-flex xs5 class="video-bg-color" >
+              <v-flex xs4 class="video-bg-color" >
                 <!-- <v-container fill-height> -->
                   <v-layout column wrap justify-center>
                     <!-- <div> -->
                       <v-layout row wrap>
-                        <v-flex xs9  @click="play(video)">
-                          <h3>{{video.name}}</h3>
+                        <v-flex xs9  @click="play(video)" pl-1>
+                          <h4>{{video.name}}</h4>
                         </v-flex>
-                        <v-flex xs3 pl-3>
+                        <v-flex xs3 pr-1>
                           <v-icon @click="showMenu(video, index)" :id="'menu_'+index">menu</v-icon>
                         </v-flex>
                       </v-layout>
-                      <!-- <v-toolbar-side-icon style="float:right"  ></v-toolbar-side-icon> -->
-                    <!-- </div> -->
-                    <!-- <v-layout  @click="play(video)">
-                      by {{video.performedBy}}
-                    </v-layout> -->
+                      <v-layout  @click="play(video)" row wrap>
+                        <v-flex xs10 pl-1>
+                        <b>by</b> {{video.performedBy}}
+                        </v-flex>
+                      </v-layout>
                   </v-layout>
-                  <v-layout  @click="play(video)" fill-height>
+                  <!-- <v-layout  @click="play(video)" column wrap justify-center >
+                    <v-layout row wrap>
                     <v-flex xs12 >
-                          by {{video.performedBy}}
+                        by {{video.performedBy}}
                     </v-flex>
-                  </v-layout>
+                    </v-layout>
+                  </v-layout> -->
                 <!-- </v-container> -->
               </v-flex>
             </v-layout>
