@@ -16,7 +16,7 @@ export default {
                     propsData: props,
                     destroyed: function(){
                         document.body.removeChild(this.$el)
-                        resolve({confirmed: this.value})
+                        resolve({videosToAdd: this.videosToAdd})
                     }
                 })
                 instance.$mount()

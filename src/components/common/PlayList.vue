@@ -6,14 +6,14 @@
             class="headline primary "
             primary-title
           >
-            {{list.name}}
+            {{$t('playlist.playlistLabel')}} - {{list.name}}
             <v-spacer></v-spacer>
             <v-icon @click="close">close</v-icon>
           </v-card-title>
           
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn
+            <v-btn @click="addToPlayListDialog(list)"
               color="primary"
               flat
              
@@ -81,10 +81,29 @@ export default {
         {
           list: this.list.videos,
           startVideo: video,
-          continuous: false
+          continuous: true
         }
       )
 
+    },
+    addToPlayListDialog: function(playlist){
+      this.$addToPlayListDialog({list: playlist}).then(
+        (response) => {
+          if(response.videosToAdd.length > 0){
+            console.log('this.list.videos:')
+            console.log(this.list.videos)
+
+            response.videosToAdd.forEach(video => {
+              this.list.videos.push(video)
+            });
+            axios({
+              method: 'POST',
+              'url': '/api/savePlaylist',
+              data: this.list
+            });
+          }
+        }
+      )
     }
   }
 }
