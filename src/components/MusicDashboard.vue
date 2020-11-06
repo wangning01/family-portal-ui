@@ -62,7 +62,7 @@ export default {
   name: 'Home',
   components: {HeaderComp, NavigationComp},
   beforeMount: function () {
-    // console.log(this.$store.state)
+    
     axios({
       method: 'GET',
       'url': '/api/allVideos'

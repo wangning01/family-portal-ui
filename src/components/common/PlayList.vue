@@ -1,6 +1,6 @@
 <template>
 <v-content>
-    <v-dialog v-model="displayDialog" width="300" persistent>
+    <v-dialog v-model="displayDialog" width="370" persistent>
         <v-card>
           <v-card-title
             class="headline primary "
@@ -15,22 +15,32 @@
             <v-spacer></v-spacer>
             <v-btn @click="addToPlayListDialog(list)"
               color="primary"
-              flat
+              
              
             >
               {{$t('navigationDrawer.dialog.addLabel')}}
             </v-btn>
+            <!-- <v-btn color="primary"> Remove</v-btn> -->
           </v-card-actions>
           <v-container>
           <v-layout row wrap>
             <v-card >
-              <v-flex v-for="(video, index) in list.videos" :key="video.videoId" xs12 class="pr-1 pb-1">
-                  <yt-player :yturl="video.youtubeLink" :ref="'yt'+index" :width="225" :height="120" 
-                  :playerVars="playerVars" 
-                   @playing="stopAndPlayInPopup('yt'+index, video)"
-                  />
+              <v-flex v-for="(video, index) in list.videos" :key="video.videoId"  class="pr-1 pb-1">
+                  <v-layout>
+                    <v-flex xs8>
+                      <yt-player :yturl="video.youtubeLink" :ref="'yt'+index" :width="225" :height="120" 
+                      :playerVars="playerVars" 
+                      @playing="stopAndPlayInPopup('yt'+index, video)"
+                      />
+                    </v-flex>
+                    <v-flex xs4 >
+                      <v-btn color="primary" small @click="removeFromPlaylist(video)"> Remove</v-btn>
+                    </v-flex>
+                  </v-layout>
               </v-flex>
+              
             </v-card>
+            
           </v-layout>
           </v-container>
         </v-card>
@@ -91,19 +101,29 @@ export default {
         (response) => {
           if(response.videosToAdd.length > 0){
             console.log('this.list.videos:')
-            console.log(this.list.videos)
+            // console.log(this.list.videos)
 
             response.videosToAdd.forEach(video => {
-              this.list.videos.push(video)
+              playlist.videos.push(video)
             });
             axios({
               method: 'POST',
               'url': '/api/savePlaylist',
-              data: this.list
+              data: playlist
             });
           }
         }
       )
+    },
+    removeFromPlaylist: function(video){
+        if(this.list.videos.length > 0){
+          this.list.videos.splice(this.list.videos.findIndex(v => v.videoId === video.videoId), 1)
+          axios({
+                method: 'POST',
+                'url': '/api/savePlaylist',
+                data: this.list
+          })
+        }
     }
   }
 }
