@@ -84,6 +84,9 @@ export default {
         method: 'GET',
         url: '/api/getPlaylist/'+playlistId
       })
+    },
+    getYoutubeIdFromUrl(youtubeUrl){
+      return this.$youtube.getIdFromUrl(youtubeUrl)
     }
   }
 }

@@ -40,7 +40,7 @@ export default {
   ],
   data () {
     return {
-      languages: ['ENG', 'CHN'],
+      languages: ['ENG', 'CHN', 'JPN'],
       video: {}
     }
   },

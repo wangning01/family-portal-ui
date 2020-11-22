@@ -19,7 +19,7 @@ import PlayVideoList from '@/plugins/playVideoList.js'
 import CreateNewPlaylist from '@/plugins/createNewPlaylist.js'
 import VeeValidate from 'vee-validate'
 import mixin from '@/plugins/mixin/mixin.js'
-// import VueYoutube from 'vue-youtube'
+import VueYoutube from 'vue-youtube' 
 // import YoutubeVue from 'youtube-vue'
 import VuePlayerPlugin, { Player } from 'vue-youtube-iframe-api'
 
@@ -29,7 +29,7 @@ Vue.use(Vuetify, {
 })
 Vue.use(VeeValidate)
 // Vue.use(Vuex)
-// Vue.use(VueYoutube)
+Vue.use(VueYoutube)
 // Vue.use(YoutubeVue)
 Vue.use(VuePlayerPlugin)
 Vue.component('yt-player', Player)
@@ -40,6 +40,7 @@ Vue.use(AddToPlayListDialog)
 Vue.use(PlayVideoList)
 Vue.use(CreateNewPlaylist)
 Vue.mixin(mixin)
+
 
 /* eslint-disable no-new */
 new Vue({

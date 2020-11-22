@@ -28,10 +28,11 @@
               <v-flex v-for="(video, index) in list.videos" :key="video.videoId"  class="pr-1 pb-1">
                   <v-layout>
                     <v-flex xs8>
-                      <yt-player :yturl="video.youtubeLink" :ref="'yt'+index" :width="225" :height="120" 
-                      :playerVars="playerVars" 
-                      @playing="stopAndPlayInPopup('yt'+index, video)"
-                      />
+                      <youtube :video-id="$youtube.getIdFromUrl(video.youtubeLink)" 
+                        :ref="'yt'+index"
+                        width="225" height="120"
+                        @playing="stopAndPlayInPopup('yt'+index, video)"  
+                        :player-vars="playerVars" ></youtube>
                     </v-flex>
                     <v-flex xs4 >
                       <v-btn color="primary" small @click="removeFromPlaylist(video)"> Remove</v-btn>

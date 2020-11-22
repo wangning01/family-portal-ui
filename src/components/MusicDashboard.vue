@@ -13,7 +13,8 @@
             <v-layout >
               <v-flex xs8 class="video-bg-color" @click.prevent="play(video)">
                   <v-layout>
-                      <yt-player :yturl="video.youtubeLink" ref="yt" :width="215" :height="120" :playerVars="playerVars"></yt-player>
+                      <!-- <yt-player :yturl="video.youtubeLink" ref="yt" :width="215" :height="120" :playerVars="playerVars"></yt-player> -->
+                      <youtube :video-id="getYoutubeIdFromUrl(video.youtubeLink)" width="215" height="120"  :player-vars="playerVars" ></youtube>
                   </v-layout>
               </v-flex>
               <v-flex xs4 class="video-bg-color" >
@@ -62,7 +63,7 @@ export default {
   name: 'Home',
   components: {HeaderComp, NavigationComp},
   beforeMount: function () {
-    
+
     axios({
       method: 'GET',
       'url': '/api/allVideos'
@@ -111,7 +112,7 @@ export default {
     }
   },
   methods: {
-    play (video) {
+    play(video) {
       this.$playVideoList(
         {
           startVideo: video,
@@ -133,6 +134,9 @@ export default {
         }
       )
     }
+    // getYoutubeIdFromUrl(youtubeUrl){
+    //   return this.$youtube.getIdFromUrl(youtubeUrl)
+    // }
     
   }
 }

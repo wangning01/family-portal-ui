@@ -14,7 +14,8 @@
                        <v-flex v-for="(video, index) in videoNotInList" :key="video.videoId" xs12>
                            <v-layout>
                                <v-flex xs9>
-                                <yt-player :yturl="video.youtubeLink" ref="yt" :width="250" :height="120" :playerVars="playerVars"></yt-player>
+                               <!-- <yt-player :yturl="video.youtubeLink" ref="yt" :width="250" :height="120" :playerVars="playerVars"></yt-player> -->
+                                <youtube :video-id="getYoutubeIdFromUrl(video.youtubeLink)" width="250" height="120"  :player-vars="playerVars" ></youtube>
                                </v-flex>
                                <v-flex xs3>
                                    <v-checkbox v-model="videosToAdd" :value="video"></v-checkbox>
