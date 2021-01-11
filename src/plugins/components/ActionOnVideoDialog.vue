@@ -14,7 +14,7 @@
                         <span><router-link  to="/home" class="" >{{$t('videoAction.editLabel')}}</router-link></span><br> -->
                         <v-btn class="grey" @click="onDeleteVideo()">{{$t('videoAction.deleteLabel')}}</v-btn>
                         <v-btn class="grey" @click="onEditVideo()">{{$t('videoAction.editLabel')}}</v-btn>
-                        <v-btn class="grey" @click="onAddToPlayList()">{{$t('videoAction.addToPlayListLabel')}}</v-btn>
+                        <!-- <v-btn class="grey" @click="onAddToPlayList()">{{$t('videoAction.addToPlayListLabel')}}</v-btn> -->
                         <p>&nbsp;</p>
                         <p>&nbsp;</p>
                     </v-layout>

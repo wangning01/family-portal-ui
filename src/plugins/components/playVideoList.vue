@@ -1,6 +1,6 @@
 <template>
     <v-dialog v-model="isDisplay" width="560" persistent>
-        <v-card>
+        <v-card class="primary">
           <v-card-title
             class="headline primary pb-1 pt-1"
             primary-title
@@ -15,7 +15,7 @@
             @ready="onPlayerReady"
             @ended="playNext"
             :playerVars="playerVars"></yt-player> -->
-            <youtube 
+            <youtube  
             ref="ytplayer" 
             width="560" 
             height="320"  
@@ -24,11 +24,13 @@
             :player-vars="playerVars">
             </youtube>
             
-            <v-card-title class="headline primary pb-1 pt-1" >
+            <!-- <v-card-title class="headline primary pb-1 pt-1" > -->
+                <v-card-actions class="primary pb-2" >
                 <v-spacer></v-spacer>
                 <v-btn  color="red" dark><v-icon @click="stopAndPlayPrevious">skip_previous</v-icon></v-btn>
                 <v-btn  color="red" dark><v-icon @click="stopAndPlayNext">skip_next</v-icon> </v-btn>
-            </v-card-title>
+                </v-card-actions>
+            <!-- </v-card-title> -->
         </v-card>
       </v-dialog>
 </template>
