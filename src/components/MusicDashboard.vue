@@ -113,6 +113,7 @@ export default {
   },
   methods: {
     play(video) {
+      console.log('clicked.')
       this.$playVideoList(
         {
           startVideo: video,
